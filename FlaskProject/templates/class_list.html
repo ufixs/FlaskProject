@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="{{ url_for('static', filename='/css/layui.css') }}" rel="stylesheet">
+    <style>
+        body{
+            margin: 0;
+        }
+        .layui-input-group{
+            margin-top: 15px;
+            margin-left: 15px;
+        }
+        button>a{
+            color: white;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+        }
+        .header button{
+            margin-top: 15px;
+        }
+        .layui-input-group {
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div style="padding: 15px;">
+      <div class="layui-card layui-panel">
+
+        <div class="header">
+            <div class="layui-input-group" >
+              <input id="search_input_value" type="text" value="" placeholder="搜索班级名称" class="layui-input" />
+              <div class="layui-input-split layui-input-suffix" style="cursor: pointer;">
+                <i class="layui-icon layui-icon-search" onclick="onSearch()"></i>
+              </div>
+            </div>
+            <button type="button" class="layui-btn">
+                <a href="/add_class" target="body">新增班级</a>
+            </button>
+        </div>
+
+
+        <div class="layui-card-body">
+            <table class="layui-table" lay-even >
+              <thead>
+                <tr>
+                  <th>班级编号</th>
+                  <th>班级名称</th>
+                  <th>班级年级</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for item in class_data %}
+                <tr>
+                  <td>{{ item.class_id }}</td>
+                  <td>{{ item.class_name }}</td>
+                  <td>{{ item.class_grade }}级</td>
+                </tr>
+               {% endfor %}
+              </tbody>
+            </table>
+      </div>
+      <br><br>
+    </div>
+  </div>
+</body>
+<script src="{{ url_for('static', filename='/layui.js') }}"></script>
+<script>
+    const onSearch = ()=>{
+        const search_input_value = document.getElementById("search_input_value").value
+        console.log(search_input_value)
+        window.location.href = "/class?search="+search_input_value
+    }
+</script>
+</html>

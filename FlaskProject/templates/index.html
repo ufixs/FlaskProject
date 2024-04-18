@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生管理系统首页</title>
+    <link href="{{ url_for('static', filename='/css/layui.css') }}" rel="stylesheet">
+    <style>
+        body{
+            margin: 0;
+        }
+        p{
+            text-align: center;
+            {#color: black;#}
+        }
+        iframe{
+            border: 0 solid;
+        }
+        .layui-header ul>li{
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="layui-layout layui-layout-admin">
+
+{#    框体头部#}
+  <div class="layui-header">
+{#      标题#}
+    <div class="layui-logo layui-hide-xs">控制中心</div>
+{#      导航栏#}
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item layui-hide layui-show-sm-inline-block">
+          <p>{{ name }}，欢迎您！</p>
+        <dl class="layui-nav-child">
+          <dd><a href="/login"><p>退出账号</p></a></dd>
+        </dl>
+      </li>
+    </ul>
+  </div>
+
+{#    框体左侧区域#}
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+{#        菜单栏#}
+      <ul class="layui-nav layui-nav-tree" lay-filter="test">
+        <li class="layui-nav-item">
+            <a href="/student" target="body">
+                <p>学生列表</p>
+            </a>
+        </li>
+        <li class="layui-nav-item" >
+            <a href="/class" target="body">
+                <p>班级列表</p>
+            </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+{#内容展示区（路由）#}
+  <div class="layui-body">
+    <!-- 内容主体区域 -->
+    <iframe name="body" height="760px" width="100%"></iframe>
+  </div>
+
+</div>
+</body>
+<script src="{{ url_for('static',filename='/layui.js') }}"></script>
+</html>

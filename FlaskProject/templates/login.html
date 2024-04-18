@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生管理系统登录</title>
+    <!-- 引入 layui.css -->
+    <link href="{{ url_for('static', filename='/css/layui.css') }}" rel="stylesheet">
+    <style>
+        .form-div{
+            width: 800px;
+            height: 400px;
+            margin: 100px auto;
+        }
+        h1{
+            text-align: center;
+        }
+        .demo-login-container{
+            width: 320px;
+            margin: 21px auto 0;
+        }
+        .demo-login-other .layui-icon{
+            position: relative;
+            display: inline-block;
+            margin: 0 2px; top: 2px;
+            font-size: 26px;
+        }
+        .layui-btn{
+            background: #1e9fff;
+        }
+    </style>
+</head>
+<body>
+<div class="form-div">
+    <h1>学生信息管理系统</h1>
+    <form class="layui-form" action="/login" method="POST">
+      <div class="demo-login-container">
+        <!-- 输入用户名 -->
+        <div class="layui-form-item">
+          <div class="layui-input-wrap">
+            <div class="layui-input-prefix">
+              <i class="layui-icon layui-icon-username"></i>
+            </div>
+            <input type="text" name="username" value="" lay-verify="required"
+                   placeholder="用户名" lay-reqtext="请填写用户名" autocomplete="off" class="layui-input" lay-affix="clear"
+            >
+          </div>
+        </div>
+        <!-- 输入密码 -->
+        <div class="layui-form-item">
+          <div class="layui-input-wrap">
+            <div class="layui-input-prefix">
+              <i class="layui-icon layui-icon-password"></i>
+            </div>
+            <input type="password" name="password" value="" lay-verify="required"
+                   placeholder="密   码" lay-reqtext="请填写密码" autocomplete="off" class="layui-input" lay-affix="eye"
+            >
+          </div>
+        </div>
+        <!-- 登录 -->
+        <div class="layui-form-item">
+          <button class="layui-btn layui-btn-fluid" lay-submit>登录</button>
+        </div>
+      </div>
+</form>
+</div>
+</body>
+<script src="{{ url_for('static',filename='/layui.js') }}"></script>
+<script>
+    {% if status == "error" %}
+        alert("登录失败！")
+    {% endif %}
+</script>
+</html>

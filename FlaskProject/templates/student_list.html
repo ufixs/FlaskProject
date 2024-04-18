@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="{{ url_for('static', filename='/css/layui.css') }}" rel="stylesheet">
+    <style>
+        body{
+            margin: 0;
+        }
+        .layui-input-group{
+            margin-top: 15px;
+            margin-left: 15px;
+        }
+        button>a{
+            color: white;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+        }
+        .header button{
+            margin-top: 15px;
+        }
+        .layui-input-group {
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+<div style="padding: 15px;">
+      <div class="layui-card layui-panel">
+        <div class="header">
+            <div class="layui-input-group" >
+              <input id="search_input_value" type="text" value="" placeholder="搜索学生姓名" class="layui-input" />
+              <div class="layui-input-split layui-input-suffix" style="cursor: pointer;">
+                <i class="layui-icon layui-icon-search" onclick="onSearch()"></i>
+              </div>
+            </div>
+            <button type="button" class="layui-btn">
+                <a href="/add_student" target="body">新增学生</a>
+            </button>
+        </div>
+
+        <div class="layui-card-body">
+            <table class="layui-table" lay-even >
+              <thead>
+                <tr>
+                  <th>学号</th>
+                  <th>姓名</th>
+                  <th>年龄</th>
+                  <th>性别</th>
+                  <th>班级</th>
+                  <th>年级</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for item in stu_data %}
+                <tr>
+                  <td>{{ item.s_id }}</td>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.age }}</td>
+                  <td>{{ item.sex }}</td>
+                  <td>{{ item.c_name }}</td>
+                  <td>{{ item.c_grade }}级</td>
+                  <td>
+                    <button type="button" class="layui-btn layui-btn-primary layui-bg-blue">
+                        <a href="{{url_for(
+                            'edit_route',
+                            s_id=item.s_id,
+                            c_id=item.c_id,
+                            name=item.name,
+                            age=item.age,
+                            sex=item.sex,
+                            c_name=item.c_name,
+                            c_grade=item.c_grade
+                        )}}" target="body">编辑</a>
+                    </button>
+                      <button type="button" class="layui-btn layui-bg-red" onclick="onDelete({{ item.s_id }})">
+                          删除
+                      </button>
+                  </td>
+                </tr>
+               {% endfor %}
+              </tbody>
+            </table>
+      </div>
+      <br><br>
+    </div>
+  </div>
+</body>
+<script src="{{ url_for('static', filename='/layui.js') }}"></script>
+<script>
+    {#搜索#}
+    const onSearch = ()=>{
+        const search_input_value = document.getElementById("search_input_value").value
+        console.log(search_input_value)
+        window.location.href = "/student?search="+search_input_value
+    }
+    {#删除#}
+    const onDelete = (id)=>{
+        window.location.href = "/student?delete="+id
+    }
+</script>
+</html>

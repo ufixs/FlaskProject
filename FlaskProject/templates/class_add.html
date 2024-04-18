@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="{{ url_for('static', filename='/css/layui.css') }}" rel="stylesheet">
+    <style>
+        body{
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="layui-bg-gray" style="padding: 15px;">
+        <div class="layui-card">
+            <div class="layui-card-header">新增班级</div>
+            <div class="layui-card-body">
+                <form class="layui-form layui-form-pane" action="/add_class" method="POST">
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">班级</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="name" value="" placeholder="请输入班级名称" lay-verify="required" autocomplete="off" lay-affix="clear" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">年级</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="grade" value="" placeholder="请输入年级" lay-verify="required" autocomplete="off" lay-affix="clear" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                <button class="layui-btn" lay-submit>确认</button>
+                <button type="botton" class="layui-btn layui-btn-primary"><a href="/class">取消</a></button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="{{ url_for('static',filename='/layui.js') }}"></script>
+</html>
